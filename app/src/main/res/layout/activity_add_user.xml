@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/r"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddUserActivity">
 
     <EditText
         android:id="@+id/idFirstname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Etunimi"
@@ -20,19 +21,18 @@
 
     <EditText
         android:id="@+id/idLastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="Sukunimi"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/idFirstname"
         app:layout_constraintTop_toBottomOf="@+id/idFirstname" />
 
     <EditText
         android:id="@+id/idEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="Sähköpostiosoite"
         android:inputType="textPersonName"
@@ -45,8 +45,7 @@
         android:id="@+id/rgField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/idLastname"
         app:layout_constraintTop_toBottomOf="@+id/idEmail">
 
         <RadioButton
@@ -74,25 +73,24 @@
             android:text="Sähkötekniikka" />
     </RadioGroup>
 
+
     <Button
         android:id="@+id/idAddUser"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="addUser"
         android:text="Lisää käyttäjä"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgImage" />
+        app:layout_constraintTop_toBottomOf="@+id/cbUimamaisteri" />
 
     <RadioGroup
         android:id="@+id/rgImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgField">
+        app:layout_constraintEnd_toEndOf="@+id/idLastname"
+        app:layout_constraintTop_toBottomOf="@+id/idEmail">
 
         <RadioButton
             android:id="@+id/rbimage1"
@@ -101,16 +99,48 @@
             android:drawableRight="@drawable/image1small" />
 
         <RadioButton
-            android:id="@+id/rbimage2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:drawableRight="@drawable/image2small" />
-
-        <RadioButton
             android:id="@+id/rbimage3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:drawableRight="@drawable/image3small" />
+
+        <RadioButton
+            android:id="@+id/rbimage2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:drawableRight="@drawable/image2small" />
     </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbKandi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="kandidaatin tutkinto"
+        app:layout_constraintStart_toStartOf="@+id/rgField"
+        app:layout_constraintTop_toBottomOf="@+id/rgField" />
+
+    <CheckBox
+        android:id="@+id/cbDI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diplomi-insinöörin tutkinto"
+        app:layout_constraintStart_toStartOf="@+id/rgField"
+        app:layout_constraintTop_toBottomOf="@+id/cbKandi" />
+
+    <CheckBox
+        android:id="@+id/cbTekniikantohtori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tekniikan tohtorin tutkinto"
+        app:layout_constraintStart_toStartOf="@+id/cbDI"
+        app:layout_constraintTop_toBottomOf="@+id/cbDI" />
+
+    <CheckBox
+        android:id="@+id/cbUimamaisteri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uimamaisteri"
+        app:layout_constraintStart_toStartOf="@+id/cbTekniikantohtori"
+        app:layout_constraintTop_toBottomOf="@+id/cbTekniikantohtori" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

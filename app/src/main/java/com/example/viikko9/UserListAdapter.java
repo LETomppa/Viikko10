@@ -32,6 +32,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserViewHolder> {
         holder.degreeProgram.setText(users.get(position).getDegreeProgram());
         holder.email.setText(users.get(position).getEmail());
         holder.userImage.setImageResource(users.get(position).getImage());
+        holder.degrees.setText(users.get(position).getDegrees());
     }
 
     @Override

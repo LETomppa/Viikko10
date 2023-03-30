@@ -2,8 +2,10 @@ package com.example.viikko9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -14,11 +16,14 @@ public class AddUserActivity extends AppCompatActivity {
 
     private String degreeProgram;
     private int image;
-
+    private Context context;
+    private StringBuilder selectedDegrees = new StringBuilder();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
+        context = AddUserActivity.this;
+
     }
 
     public void addUser(View view) {
@@ -27,6 +32,27 @@ public class AddUserActivity extends AppCompatActivity {
         email = findViewById(R.id.idEmail);
         RadioGroup rgFieldType = findViewById(R.id.rgField);
         RadioGroup rgImageType = findViewById(R.id.rgImage);
+        selectedDegrees.setLength(0);
+        CheckBox kandi = findViewById(R.id.cbKandi);
+        CheckBox dippa = findViewById(R.id.cbDI);
+        CheckBox tohtori = findViewById(R.id.cbTekniikantohtori);
+        CheckBox uima = findViewById(R.id.cbUimamaisteri);
+        if (kandi.isChecked() || dippa.isChecked() || tohtori.isChecked() || uima.isChecked()) {
+            selectedDegrees.append("Suoritetut tutkinnot:\n");
+        }
+        if (kandi.isChecked()) {
+            selectedDegrees.append("kandidaatin tutkinto\n");
+        }
+        if (dippa.isChecked()) {
+            selectedDegrees.append("Diplomi-insinöörin tutkinto\n");
+        }
+        if (tohtori.isChecked()) {
+            selectedDegrees.append("Tekniikan tohtorin tutkinto\n");
+        }
+        if (uima.isChecked()) {
+            selectedDegrees.append("Uimamaisteri");
+        }
+
         switch (rgFieldType.getCheckedRadioButtonId()) {
             case R.id.rbTite:
                 degreeProgram = "Tietotekniikka";
@@ -51,8 +77,11 @@ public class AddUserActivity extends AppCompatActivity {
                 image = R.drawable.image3;
                 break;
         }
-        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), degreeProgram, image);
+
+        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), degreeProgram, image, selectedDegrees.toString());
         UserStorage.getInstance().addUser(user);
+        UserStorage.getInstance().sortUsers();
+        UserStorage.getInstance().saveUsers(context);
     }
 
 
